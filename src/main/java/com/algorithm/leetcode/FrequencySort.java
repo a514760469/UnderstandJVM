@@ -1,6 +1,5 @@
 package com.algorithm.leetcode;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +21,20 @@ public class FrequencySort {
             char c = s.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        System.out.println(map);
 
-        map.keySet();
+        StringBuilder res = new StringBuilder();
+        Map<Character, Integer> tmp = new HashMap<>(map);
+        for (int i = 0; i < s.length(); i++) {
+            for (char c : tmp.keySet()) {
+                tmp.put(c, tmp.get(c) - 1);
+                if (tmp.get(c) == 0) {
+                    for (int j = 0; j < map.get(c); j ++) {
+                        res.append(c);
+                    }
+                }
+            }
+        }
 
-        return null;
+        return res.reverse().toString();
     }
 }
