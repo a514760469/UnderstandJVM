@@ -1,17 +1,25 @@
 package com.algorithm.heap;
 
 /**
- * 最大堆
- * 数组实现
+ * 最大索引堆
+ * 元素比较的时候比较的是data中的元素，交换的时候交换的是indexes中的元素
  */
-public class MaxHeap<Item extends Comparable> {
+public class IndexMapHeap<Item extends Comparable> {
 
-    // 存放数据
-    /*
-     * 0  1  2   3   4   5   6   7
-     * -  51 41 30  28  16  22  13
+    /**
+     * 存放数据
      */
     private Item[] data;
+
+    /**
+     * 索引数组，代替data中的元素来进行交换
+     */
+    private int[] indexes;
+
+    /**
+     * 最大索引堆中的反向索引, reverse[i] = x 表示索引i在x的位置
+     */
+    private int[] reverse;
 
     /**
      * 数据数量
@@ -27,9 +35,11 @@ public class MaxHeap<Item extends Comparable> {
      * @param capacity 容量
      */
     @SuppressWarnings("unchecked")
-    public MaxHeap(int capacity) {
+    public IndexMapHeap(int capacity) {
         // 不能直接声明泛型数组，只能先声明再强制转换
         data = (Item[]) new Comparable[capacity + 1];
+        indexes = new int[capacity + 1];
+        reverse = new int[capacity + 1];
         this.count = 0;
         this.capacity = capacity;
     }
@@ -40,8 +50,9 @@ public class MaxHeap<Item extends Comparable> {
      * @param n
      */
     @SuppressWarnings("unchecked")
-    public MaxHeap(Item[] arr, int n) {
+    public IndexMapHeap(Item[] arr, int n) {
         data = (Item[]) new Comparable[n + 1];
+        indexes = new int[n + 1];
         this.capacity = n;
         for (int i = 0; i < n; i ++ ) {
             data[i+1] = arr[i];
@@ -69,13 +80,17 @@ public class MaxHeap<Item extends Comparable> {
     }
 
     /**
-     * 新增一个元素
+     * 插入一个元素
+     * 传入的i对用户而言是从0索引的
      * @param item
      */
-    public void insert(Item item) {
+    public void insert(int i, Item item) {
         assert count + 1 <= capacity;
+        assert i + 1 >= 1 && i + 1 <= capacity;
+        i += 1;
 
         data[count + 1] = item;
+
         count++;
         shiftUp(count);
     }
@@ -86,8 +101,7 @@ public class MaxHeap<Item extends Comparable> {
      */
     public Item extractMax() {
         assert count > 0;
-        // 取出的元素是根节点元素, 因为根节点就是最大的
-        Item ret = data[1];
+        Item ret = data[indexes[1]];
         // 取出之后将末尾元素放到根的位置
         swap(1, count);
         // 总数 -1
@@ -97,6 +111,46 @@ public class MaxHeap<Item extends Comparable> {
         return ret;
     }
 
+    /**
+     * 取出最大索引
+     * @return
+     */
+    public int extractMaxIndex() {
+        assert count > 0;
+        int ret = indexes[1] - 1;
+        // 取出之后将末尾元素放到根的位置
+        swap(1, count);
+        // 总数 -1
+        count--;
+        // shiftDown(1) 根位置元素 使堆结构继续保持
+        shiftDown(1);
+        return ret;
+    }
+
+    /**
+     *
+     * @param i
+     * @return
+     */
+    Item getItem(int i) {
+        return data[i+1];
+    }
+
+    void change(int i, Item newItem) {
+
+        i += 1;
+        data[i] = newItem;
+        // 找到indexes[j] = i , j 表示data[i] 在堆中的位置
+        // 之后shiftUp(j) 再shiftDown(j)
+        for ( int j = 1; i <= count; j ++ ) {
+            if (indexes[j] == i) {
+                shiftUp(j);
+                shiftDown(j);
+                return;
+            }
+        }
+
+    }
     /**
      * 向下交换
      * 取出元素时
@@ -108,11 +162,11 @@ public class MaxHeap<Item extends Comparable> {
         while ( 2 * k <= count ) {
             // 此轮循环中 data[k] 和 data[j] 交换位置
             int j = 2 * k; // j : 左孩子  j + 1 : 右孩子
-            if( j + 1 <= count && data[j + 1].compareTo(data[j]) > 0) {  // 判断有右孩子且右孩子大于左孩子
+            if( j + 1 <= count && data[indexes[j + 1]].compareTo(data[indexes[j]]) > 0) {  // 判断有右孩子且右孩子大于左孩子
                 // j = j + 1;   j指向右孩子
                 j += 1;
             }
-            if( data[j].compareTo(data[k]) <= 0 ) {
+            if( data[indexes[j]].compareTo(data[indexes[k]]) <= 0 ) {
                 // 进入这里表示k位置元素比最大的孩子还大，不需要做交换，直接退出循环
                 break;
             }
@@ -134,7 +188,8 @@ public class MaxHeap<Item extends Comparable> {
     private void shiftUp(int k) {
         // k/2 为当前节点父节点
         // k = 1 为根节点
-        while (k > 1 && data[k / 2].compareTo(data[k]) < 0) {
+        while (k > 1 && data[indexes[k / 2]].compareTo(data[indexes[k]]) < 0) {
+            // 交换的也是indexes
             swap(k / 2, k);
             k /= 2;
         }
@@ -144,26 +199,9 @@ public class MaxHeap<Item extends Comparable> {
      * 交换堆中索引为i和j的两个元素
      */
     private void swap(int i, int j) {
-        Item t = data[i];
-        data[i] = data[j];
-        data[j] = t;
-    }
-
-    /**
-     * 测试
-     * @param args
-     */
-    public static void main(String[] args) {
-        MaxHeap<Integer> maxHeap = new MaxHeap<>(100);
-        System.out.println(maxHeap.size());
-        for ( int i = 0; i < 15; i++ ) {
-            maxHeap.insert((int) (Math.random() * i));
-        }
-        System.out.println(maxHeap.size());
-        while (!maxHeap.isEmpty()) {
-            System.out.print(maxHeap.extractMax() + " ");
-        }
-        System.out.println();
+        int t = indexes[i];
+        indexes[i] = indexes[j];
+        indexes[j] = t;
     }
 
 }

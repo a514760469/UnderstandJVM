@@ -57,9 +57,9 @@ public class HeapSortOne {
      * @param n
      */
     private static void heapSort2(Comparable[] arr, int n) {
-        MaxHeap<Comparable> maxHeap = new MaxHeap<>(arr, n);
+        MaxHeap maxHeap = new MaxHeap<>(arr, n);
         for (int i = n - 1; i >= 0; i--) {
-            arr[i] = (int) maxHeap.extractMax();
+            arr[i] = maxHeap.extractMax();
         }
     }
 

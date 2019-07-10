@@ -124,6 +124,9 @@ public class SortTestHelper {
             System.out.println(sortClass.getSimpleName() + "." +  methodName + ": " + (endTime - startTime) + "ms");
 
             assert isSorted(arr);
+            if(!isSorted(arr)) {
+                throw new Exception("排序错误");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
