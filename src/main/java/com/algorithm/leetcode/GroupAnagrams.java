@@ -25,7 +25,6 @@ public class GroupAnagrams {
      * @return
      */
     public static List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> res = new ArrayList<>();
         Map<String, List<String>> map = new HashMap<>();// 查找表
         for (String str : strs) {
             char[] strChars = str.toCharArray();
