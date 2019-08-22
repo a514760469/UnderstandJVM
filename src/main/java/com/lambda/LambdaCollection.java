@@ -21,7 +21,9 @@ public class LambdaCollection {
 	    list2.add("4444");
 	    list2.add("5555");
 	}
-	
+
+
+
 	/**
 	 * 交集
 	 */
