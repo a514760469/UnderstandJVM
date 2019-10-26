@@ -4,8 +4,9 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+@SuppressWarnings("ConstantConditions")
 public class OptionalTest {
-	
+
 	/**
 	 * User如果不为null ： orElseGet() 方法不创建 User 对象
 	 */
@@ -16,7 +17,7 @@ public class OptionalTest {
 	    System.out.println("Using orElse");
 	    User result = Optional.ofNullable(user).orElse(createNewUser());
 	    System.out.println("Using orElseGet");
-	    User result2 = Optional.ofNullable(user).orElseGet(() -> createNewUser());
+	    User result2 = Optional.ofNullable(user).orElseGet(this::createNewUser);
 	    
 	    System.out.println("result: " + result);
 	    System.out.println("result2: " + result2);
@@ -33,7 +34,7 @@ public class OptionalTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void whenThrowException_thenOk() {
 		User user = null;
-	    User result = Optional.ofNullable(user).orElseThrow(() -> new IllegalArgumentException());
+	    User result = Optional.ofNullable(user).orElseThrow(IllegalArgumentException::new);
 	    System.out.println(result);
 	}
 	
@@ -42,7 +43,7 @@ public class OptionalTest {
 //	    User user = new User("anna@gmail.com", "1234");
 	    User user = null;
 	    String email = Optional.ofNullable(user)
-	      .map(u -> u.getMail()).orElse("default@gmail.com");
+	      .map(User::getMail).orElse("default@gmail.com");
 	    System.out.println(email);
 //	    System.out.println(user.getMail() + "=" + email);
 	}
@@ -68,6 +69,7 @@ class User {
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	@Override
 	public String toString() {
 		return "User {mail=" + mail + ", id=" + id + "}";
