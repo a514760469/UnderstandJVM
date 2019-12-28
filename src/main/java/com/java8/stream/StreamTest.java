@@ -1,6 +1,7 @@
-package com.stream;
+package com.java8.stream;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -81,7 +82,19 @@ public class StreamTest {
 					return s.toUpperCase();
 				})
 				.forEach(s -> System.out.println("forEach: " + s));
-		
+	}
+
+	/**
+	 * 生成10个随机数
+	 */
+	@Test
+	public void testStreamGenerate() {
+
+		Stream.generate(new Random()::nextInt).limit(10).forEach(System.out::println);
+		// IntStream 逼格很高
+		IntStream.generate(() -> (int) System.nanoTime() % 100).limit(10).forEach(System.err::println);
+		// 等差数列
+		Stream.iterate(0, n -> n + 3).limit(10).forEach(System.err::println);
 	}
 }
 

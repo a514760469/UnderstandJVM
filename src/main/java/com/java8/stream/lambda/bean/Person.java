@@ -1,4 +1,4 @@
-package com.stream.lambda.bean;
+package com.java8.stream.lambda.bean;
 
 /**
  * @author zhanglifeng

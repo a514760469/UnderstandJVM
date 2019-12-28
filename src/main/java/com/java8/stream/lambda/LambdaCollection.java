@@ -1,4 +1,4 @@
-package com.stream.lambda;
+package com.java8.stream.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,7 @@ public class LambdaCollection {
 		List<String> list = list1.stream().filter(item -> list2.contains(item)).collect(Collectors.toList());
 		list.forEach(System.out::println);
 	}
+
 	/**
 	 * 并集
 	 */
@@ -40,7 +41,13 @@ public class LambdaCollection {
 		list1.addAll(list2);
 		list1.stream().distinct().forEach(System.out::println);
 	}
-	
+
+	@Test
+	public void testNormal() {
+//		list1.containsAll(list2);
+		list1.retainAll(list2);
+		System.out.println(list1);
+	}
 }
 
 

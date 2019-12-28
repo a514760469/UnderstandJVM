@@ -1,4 +1,4 @@
-package com.stream;
+package com.java8.stream;
 
 import java.util.Optional;
 
