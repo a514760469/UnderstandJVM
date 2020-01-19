@@ -10,6 +10,7 @@ package com.jvm.oom;
  * -Xloggc:../logs/gc.log 				日志文件的输出路径
  * 
  * -XX:+PrintFlagsInitial 				查看虚拟机初始化参数
+ * -XX:+PrintCommandLineFlags 			查看默认设置收集器类型（还有其他默认开启的参数）
  * 
  * -XX:MaxPermSize=8M 	(Java8不支持)
  * -XX:MetaspaceSize=128M				初始Metaspace大小元空间(Java 8)

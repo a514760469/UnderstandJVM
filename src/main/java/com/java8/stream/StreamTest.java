@@ -1,12 +1,12 @@
 package com.java8.stream;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
-
-import org.junit.Test;
 
 public class StreamTest {
 	
@@ -14,7 +14,7 @@ public class StreamTest {
 		IntStream.range(1, 5).forEach(System.out::println);
 		LongStream.range(0, 5).forEach(System.out::println);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -96,6 +96,7 @@ public class StreamTest {
 		// 等差数列
 		Stream.iterate(0, n -> n + 3).limit(10).forEach(System.err::println);
 	}
+
 }
 
 
