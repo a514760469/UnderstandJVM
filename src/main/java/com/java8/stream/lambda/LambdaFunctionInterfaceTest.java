@@ -1,7 +1,6 @@
 package com.java8.stream.lambda;
 
 import com.java8.stream.lambda.bean.Person;
-import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.Map;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * @author zhanglifeng

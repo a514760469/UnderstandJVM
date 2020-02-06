@@ -1,5 +1,8 @@
 package com.java8.stream;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,4 +31,35 @@ public class FlatMap {
         System.out.println(stringList);
 
     }
+
+    @Test
+    public void compareMapAndFlatMap() {
+        List<String> list = Arrays.asList("aaa", "bbb", "ddd", "eee", "ccc");
+        list.stream().map(s -> {
+            List<Character> characters = new ArrayList<>();
+            for (char c : s.toCharArray()) {
+                characters.add(c);
+            }
+            return characters.stream();
+        }).forEach(characterStream -> characterStream.forEach(System.out::print));
+
+        System.out.println();
+        list.stream().flatMap(s -> {
+            List<Character> characters = new ArrayList<>();
+            for (char c : s.toCharArray()) {
+                characters.add(c);
+            }
+            return characters.stream();
+        }).forEach(System.out::print);
+    }
+
+    /**
+     * 给定一个需求：给定单词列表["Hello","World"]，要返回列表["H","e","l", "o","W","r","d"]
+     */
+    @Test
+    public void compareMapAndFlatMap2() {
+        List<String> list = Arrays.asList("hello", "world");
+        list.stream().flatMap(s -> Arrays.stream(s.split(""))).distinct().forEach(System.out::print);
+    }
+
 }
