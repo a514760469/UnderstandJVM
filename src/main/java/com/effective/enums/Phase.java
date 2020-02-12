@@ -8,11 +8,12 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
 /**
+ * 37:使用EnumMap代替数组索引
  * Phase: 阶段
  */
 public enum Phase {
-    // 固    液       气
-    SOLID, LIQUID, GAS;
+    // 固    液      气    离子
+    SOLID, LIQUID, GAS, PLASMA;
 
     /**
      * Transition: 过渡
@@ -42,7 +43,16 @@ public enum Phase {
         /**
          * 凝华
          */
-        DEPOSIT(GAS, SOLID);
+        DEPOSIT(GAS, SOLID),
+        /**
+         * 电离化
+         */
+        IONIZE(GAS, PLASMA),
+        /**
+         * 消电离化
+         */
+        DEIONIZE(PLASMA, GAS)
+        ;
 
         /**
          * 起始阶段
@@ -74,6 +84,12 @@ public enum Phase {
                     )
                 );
 
+        /**
+         * 返回from阶段到to阶段的过渡Transition
+         * @param from from阶段
+         * @param to to阶段
+         * @return 过渡Transition
+         */
         public static Transition from(Phase from, Phase to) {
             return map.get(from).get(to);
         }
