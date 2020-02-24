@@ -60,6 +60,9 @@ public class StreamCollect {
         System.out.println(maxAndThen);
     }
 
+    /**
+     * partitioningBy，groupingBy的变体
+     */
     @Test
     public void partitioningBy() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 5, 5, 6, 9);
