@@ -22,7 +22,7 @@ public class NameChecker {
 	
 	private final Messager messager;
 
-	NamecheckerScanner namecheckerScanner = new NamecheckerScanner();
+	NameCheckerScanner namecheckerScanner = new NameCheckerScanner();
 	
 	NameChecker(ProcessingEnvironment processingEnv) {
 		this.messager = processingEnv.getMessager();
@@ -37,7 +37,7 @@ public class NameChecker {
 	 * 程序元素的扫描访问者
 	 * @author zhanglifeng
 	 */
-	private class NamecheckerScanner extends ElementScanner8<Void, Void> {
+	private class NameCheckerScanner extends ElementScanner8<Void, Void> {
 		/**
 		 * 检查类
 		 */
@@ -85,7 +85,7 @@ public class NameChecker {
 		private boolean heuristicallyConstant(VariableElement e) {
 			if(e.getEnclosingElement().getKind() == ElementKind.INTERFACE) {
 				return true;
-			} else if (e.getKind() == ElementKind.FIELD && 
+			} else if (e.getKind() == ElementKind.FIELD &&
 					e.getModifiers().containsAll(EnumSet.of(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL))) {
 				return true;
 			}
