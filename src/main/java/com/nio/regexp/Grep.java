@@ -75,10 +75,13 @@ public class Grep {
 
     /**
      * 运行grep操作的测试代码。
+     * 两个命令行参数
+     * 1、 -i 或 --ignore-case 忽略大小写，
+     * 2、 -1 它在每个单独的文件上运行grep操作, 而不是将它们全部传递给一个调用。
      * Test code to run grep operations. Accepts two command-line options: -i or --ignore-case,
      * compile the given pattern so that case of alpha characters is ignored.
-     * Or -1, which runs the grep operation on each individual file,
-     * rather that passing them all to one invocation. This is just to test the different methods.
+     * Or -1, which runs the grep operation on each individual file, rather that passing them all to one invocation.
+     * This is just to test the different methods.
      * The printed output is slightly different when -1 is specified.
      */
     public static void main(String[] args) {
@@ -92,10 +95,10 @@ public class Grep {
                 if (arg.equals("-i") || arg.equals("--ignore-case")) {
                     ignoreCase = true;
                 }
-            }
-
-            if (arg.equals("-1")) {
-                onebyone = true;
+                if (arg.equals("-1")) {
+                    onebyone = true;
+                }
+                continue;
             }
             argList.add(arg);
         }
@@ -141,7 +144,7 @@ public class Grep {
             try {
                 matches = grepper.grep(files);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("\t*** " + e);
             }
             // 打印匹配行的资料
             for (MatchedLine match : matches) {
