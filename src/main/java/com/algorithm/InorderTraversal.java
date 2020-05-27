@@ -30,7 +30,7 @@ public class InorderTraversal {
 	}
 	
 	public static List<Integer> inorderTraversal(TreeNode root) {
-		recursion(initTree());
+		recursion(root);
 		return res;
 	}
 	
