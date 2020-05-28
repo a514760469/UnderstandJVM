@@ -1,5 +1,7 @@
 package com.algorithm;
 
+import com.algorithm.util.PrintUtils;
+
 /**
  * 背包问题
  * @author zhanglifeng
@@ -41,7 +43,7 @@ public class KnapsackProblem {
                     // 装入或者不装入，择优
                     dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - curW] + curVal);
                 }
-                printDimensionalArrays(dp);
+                PrintUtils.printDimensionalArrays(dp);
             }
         }
 
@@ -80,7 +82,7 @@ public class KnapsackProblem {
                 } else {
                     dp[i][j] = dp[i - 1][j] | dp[i - 1][j - nums[i - 1]];
                 }
-                printDimensionalArrays(dp);
+                PrintUtils.printDimensionalArrays(dp);
             }
         }
 
@@ -155,26 +157,5 @@ public class KnapsackProblem {
         return dp[amount];
     }
 
-    /**
-     * 打印二维数组
-     */
-    public static void printDimensionalArrays(int[][] dimensionalArrays) {
-        for (int[] arrays : dimensionalArrays) {
-            for (int i : arrays) {
-                System.out.print("\t" + i);
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 
-    public static void printDimensionalArrays(boolean[][] dimensionalArrays) {
-        for (boolean[] arrays : dimensionalArrays) {
-            for (boolean i : arrays) {
-                System.out.print("\t" + (i ? 1 : 0));
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 }
