@@ -1,7 +1,7 @@
 package com.algorithm.leetcode;
 
 /**
- * 二叉树节点的定义
+ * 二叉树节点的定义(leetcode)
  * @author zhanglifeng
  * @since 2020-05-15 14:05
  */
