@@ -3,7 +3,7 @@ package com.algorithm.leetcode;
 import java.util.Arrays;
 
 /**
- * 198. 打家劫舍
+ * 打家劫舍问题
  * @author zhanglifeng
  * @since 2020-05-29 18:04
  */
@@ -12,10 +12,13 @@ public class HouseRob {
 
     public static void main(String[] args) {
         HouseRob solution = new HouseRob();
-        int rob = solution.rob2(new int[]{1, 2, 3, 4, 5});
+        int rob = solution.robII(new int[]{ 2, 3, 2});
         System.out.println(rob);
     }
 
+    /**
+     * 198. 打家劫舍
+     */
     public int rob(int[] nums) {
         int[] memo = new int[nums.length];
         Arrays.fill(memo, -1);
@@ -50,4 +53,31 @@ public class HouseRob {
         return dp[0];
     }
 
+    /**
+     * 213. 打家劫舍 II
+     */
+    public int robII(int[] nums) {
+        int n = nums.length;
+        if (n == 1) {
+            return nums[0];
+        }
+        return Math.max(robRange(nums, 0, n - 2), robRange(nums, 1, n - 1));
+    }
+
+    /**
+     * 闭区间[start, end]上的结果
+     * 在问题1上稍作修改
+     */
+    public int robRange(int[] nums, int start, int end) {
+        int res = 0;// dp[i]
+        int dpi2 = 0;
+        int dpi1 = 0;
+        for (int i = end; i >= start; i--) {
+            res = Math.max(nums[i] + dpi2, dpi1);
+            dpi2 = dpi1;
+            dpi1 = res;
+//            dp_i = Math.max(nums[i] + dp[i + 2], dp[i + 1]);
+        }
+        return res;
+    }
 }
