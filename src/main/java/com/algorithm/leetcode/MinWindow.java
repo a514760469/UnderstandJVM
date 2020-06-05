@@ -1,28 +1,122 @@
-package com.algorithm;
+package com.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * 最小覆盖子串
+ * 滑动窗口问题
+ * 76. 最小覆盖子串
  * 给定一个字符串 S 和一个字符串 T，请在 S 中找出包含 T 所有字母的最小子串。
  * 输入: S = "ADOBECODEBANC", T = "ABC"
  * 输出: "BANC"
  *
  */
-public class MinCoverSubStr {
+public class MinWindow {
 
     public static void main(String[] args) {
 //        System.out.println(minWindow2("bbaa", "aba"));
 //        System.out.println(minWindow2("ADOBECODEBANC", "ABC"));
-        System.out.println(minWindow2("a", "aa"));
+//        System.out.println(minWindow3("ADOBECODEBANC", "AA"));
+
+        System.out.println(checkInclusion("ab", "eidboaoo"));
     }
 
     /**
+     * 567. 字符串的排列
+     * 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+     * 换句话说，第一个字符串的排列之一是第二个字符串的子串。
      *
-     * @param s
-     * @param t
-     * @return
+     * => s1 = "ab" s2 = "eidbaooo"
+     * <= true
+     */
+    @SuppressWarnings("Duplicates")
+    public static boolean checkInclusion(String s1, String s2) {
+        Map<Character, Integer> needs = new HashMap<>();
+        for (char c : s1.toCharArray()) {
+            needs.merge(c, 1, Integer::sum);
+        }
+        Map<Character, Integer> windows = new HashMap<>();
+        int left = 0; int right = 0;
+        int valid = 0;
+        while (right < s2.length()) {
+            char c = s2.charAt(right);
+            windows.put(c, windows.getOrDefault(c, 0) + 1);
+            if (needs.containsKey(c)) {
+                if (windows.get(c).equals(needs.get(c))) {
+                    valid++;
+                }
+            }
+            right++;
+
+            // 收缩窗口
+            while (right - left >= s1.length()) {
+                if (valid == needs.size()) {
+                    return true;
+                }
+                // 移除windows 中的一个字符
+                char d = s2.charAt(left);
+                if (needs.containsKey(d)) {
+                    if (windows.get(d).equals(needs.get(d))) {
+                        valid--;
+                    }
+                }
+                windows.put(d, windows.get(d) - 1);
+                left++;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 76. 最小覆盖子串
+     */
+    @SuppressWarnings("Duplicates")
+    public static String minWindow3(String s, String t) {
+        Map<Character, Integer> needs = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            needs.merge(c, 1, Integer::sum);
+//            needs.put(c, needs.getOrDefault(c, 1));
+        }
+
+        Map<Character, Integer> windows = new HashMap<>();
+        int left = 0; int right = 0; // [l, r)
+        int valid = 0;// 匹配的字符数，当valid满足时left应该收缩
+        int start = 0;// start
+        int len = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            windows.put(c, windows.getOrDefault(c, 0) + 1);
+            if (needs.containsKey(c)) {
+                if (windows.get(c).equals(needs.get(c))) {
+                    valid++;
+                }
+            }
+            right++;
+
+            // left收缩
+            while (valid == needs.size()) {
+                // 更新结果
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+                // 移除windows 中的一个字符
+                char d = s.charAt(left);
+                if (needs.containsKey(c)) {
+                    if (windows.get(d).equals(needs.get(d))) {
+                        valid--;
+                    }
+                    windows.put(d, windows.get(d) - 1);
+                }
+                left++;
+            }
+        }
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+    }
+
+
+    /**
+     *
      */
     public static String minWindow2(String s, String t) {
         // 频率 t 中所有字符出现的频率
