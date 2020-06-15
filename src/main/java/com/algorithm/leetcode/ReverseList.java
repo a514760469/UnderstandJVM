@@ -1,7 +1,5 @@
 package com.algorithm.leetcode;
 
-import com.sun.org.apache.xml.internal.security.Init;
-
 /**
  * 206. 反转链表
  * 输入: 1->2->3->4->5->NULL
@@ -28,7 +26,7 @@ public class ReverseList {
     }
 
     public static void main(String[] args) {
-        ListNode listNode = initListNode(new int[]{1,2, 3, 4, 5});
+        ListNode listNode = initListNode(new int[]{1, 2, 3, 4, 5});
         System.out.println(listNode);
 //        ListNode res = reverseList(l1);
         ListNode res = reverseBetween(listNode, 2, 4);
