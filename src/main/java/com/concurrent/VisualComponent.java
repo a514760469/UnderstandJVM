@@ -1,8 +1,7 @@
-package com.juc;
+package com.concurrent;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 

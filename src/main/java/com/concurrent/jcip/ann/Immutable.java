@@ -1,4 +1,4 @@
-package com.juc.jcip.ann;
+package com.concurrent.jcip.ann;
 import java.lang.annotation.*;
 
 /*

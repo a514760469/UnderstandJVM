@@ -1,4 +1,4 @@
-package com.juc;
+package com.concurrent;
 
 /**
  * @author zhanglifeng

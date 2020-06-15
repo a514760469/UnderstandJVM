@@ -8,7 +8,7 @@
  * must include this copyright and license notice.
  */
 
-package com.juc.jcip.ann;
+package com.concurrent.jcip.ann;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

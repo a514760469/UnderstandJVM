@@ -1,6 +1,6 @@
-package com.juc;
+package com.concurrent;
 
-import com.juc.jcip.ann.ThreadSafe;
+import com.concurrent.jcip.ann.ThreadSafe;
 
 /**
  * @author zhanglifeng

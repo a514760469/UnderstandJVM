@@ -1,4 +1,4 @@
-package com.juc.jcip.ann;
+package com.concurrent.jcip.ann;
 import java.lang.annotation.*;
 
 /*
@@ -12,16 +12,15 @@ import java.lang.annotation.*;
  */
 
 
-
 /**
- * The class to which this annotation is applied is thread-safe.  This means that
- * no sequences of accesses (reads and writes to public fields, calls to public methods)
- * may put the object into an invalid state, regardless of the interleaving of those actions
- * by the runtime, and without requiring any additional synchronization or coordination on the
- * part of the caller.
+ * The class to which this annotation is applied is not thread-safe.
+ * This annotation primarily exists for clarifying the non-thread-safety of a class
+ * that might otherwise be assumed to be thread-safe, despite the fact that it is a bad
+ * idea to assume a class is thread-safe without good reason.
+ * @see ThreadSafe
  */
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ThreadSafe {
+public @interface NotThreadSafe {
 }
