@@ -3,12 +3,13 @@ package com.concurrent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * InterruptedException 异常，要么抛出去，要么在catch中恢复中断状态：Thread.currentThread().interrupt();
+ *
  * @author zhanglifeng
  * @since 2020-06-19 18:01
  */
