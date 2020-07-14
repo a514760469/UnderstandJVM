@@ -180,7 +180,11 @@ public class SimpleSort {
      */
     void mergeSortBottomUp(int[] arr, int n) {
 
-
+        for ( int sz = 1; sz <= n; sz += sz) {
+            for (int i = 0; i < n; i += sz + sz) {
+                merge(arr, i, i + sz - 1, i + sz + sz - 1);
+            }
+        }
     }
 
 }
