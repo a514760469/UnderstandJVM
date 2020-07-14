@@ -1,5 +1,7 @@
 package com.concurrent;
 
+import com.concurrent.jcip.ann.ThreadSafe;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 将线程安全托管给ConcurrentHashMap
  * ThreadSafe
  */
+@ThreadSafe
 public class DelegatingVehicleTracker {
 
     private final ConcurrentHashMap<String, Point> locations;

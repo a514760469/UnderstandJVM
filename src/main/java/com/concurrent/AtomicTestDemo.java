@@ -1,5 +1,6 @@
 package com.concurrent;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -15,6 +16,11 @@ public class AtomicTestDemo {
         ref.set(zs);
         ref.compareAndSet(zs, ls);
         System.out.println(ref);
+
+        float f = 10.2F;
+        System.out.println(f);
+        int i = Float.floatToIntBits(f);
+        System.out.println(i);
     }
 
     static class Member {
