@@ -25,6 +25,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openjdk.jol</groupId>
+			<artifactId>jol-core</artifactId>
+			<version>0.13</version>
+		</dependency>
 	</dependencies>
 
 </project>
