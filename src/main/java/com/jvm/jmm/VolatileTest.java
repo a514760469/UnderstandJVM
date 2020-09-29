@@ -1,4 +1,4 @@
-package com.jmm;
+package com.jvm.jmm;
 /**
  * volatile变量自增运算测试
  * @author zhanglifeng

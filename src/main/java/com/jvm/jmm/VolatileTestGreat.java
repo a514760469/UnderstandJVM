@@ -1,4 +1,4 @@
-package com.jmm;
+package com.jvm.jmm;
 
 public class VolatileTestGreat {
 	volatile boolean shutdownRequested;

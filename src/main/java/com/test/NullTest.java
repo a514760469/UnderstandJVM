@@ -1,5 +1,6 @@
 package com.test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class NullTest {
@@ -20,7 +21,9 @@ public class NullTest {
 //        new Thread(System.out::println).start();
 //        ExecutorService exec = Executors.newCachedThreadPool();
 
-        System.out.println(sum());
+//        System.out.println(sum());
+        BigDecimal subtract = new BigDecimal("1").subtract(null);
+        System.out.println(subtract);
     }
 
     static int sum(int... args){
