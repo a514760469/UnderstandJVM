@@ -26,7 +26,8 @@ public class GroupingBy {
     public void testGroupingByBigDecimal() {
         Map<String, BigDecimal> amountSum = list.stream().collect(Collectors.groupingBy(Person::getName, CollectorsUtil.summingBigDecimal(Person::getAmount)));
         System.out.println(amountSum);
-        Map<String, BigDecimal> collect =
-                list.stream().collect(Collectors.groupingBy(Person::getName, CollectorsUtil.summingBigDecimal(Person::getAmount)));
+
+        Map<Person, BigDecimal> collect = list.stream().collect(Collectors.groupingBy(person -> person, CollectorsUtil.summingBigDecimal(Person::getAmount)));
+        System.out.println(collect);
     }
 }

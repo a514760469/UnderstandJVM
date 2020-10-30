@@ -1,6 +1,7 @@
 package com.java8.stream.lambda.bean;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * @author zhanglifeng
@@ -72,5 +73,20 @@ public class Person {
                 ", age=" + age +
                 ", stature=" + stature +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                stature == person.stature &&
+                Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, stature);
     }
 }
