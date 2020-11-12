@@ -17,9 +17,10 @@ public class NullTest {
     }
 
     public static void main(String[] args) {
+
 //        new Thread(System.out::println).start();
 //        ExecutorService exec = Executors.newCachedThreadPool();
-
+        String s = new String();
         System.out.println(sum());
     }
 
