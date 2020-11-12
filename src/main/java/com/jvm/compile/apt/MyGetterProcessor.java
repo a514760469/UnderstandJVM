@@ -1,4 +1,4 @@
-package com.compile.apt;
+package com.jvm.compile.apt;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -13,25 +13,25 @@ import java.io.Writer;
 import java.util.Set;
 
 /**
- * 指定要处理的版本 java8 要处理的注解 com.compile.apt.GeneratePrint
+ * 指定要处理的版本 java8 要处理的注解 com.jvm.compile.apt.GeneratePrint
  * @author zhanglifeng
  * @since 2020-04-28 11:02
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@SupportedAnnotationTypes("com.compile.apt.GeneratePrint")
+@SupportedAnnotationTypes("com.jvm.compile.apt.GeneratePrint")
 public class MyGetterProcessor extends AbstractProcessor {
 
     /**
      * 1、先用javac 编译GeneratePrint.java 和MyGetterProcessor.java
      * 2、到src/main/java 目录下执行：
-     * javac -processor com.compile.apt.MyGetterProcessor com/compile/apt/TestAnn.java
+     * javac -processor com.jvm.compile.apt.MyGetterProcessor com/compile/apt/TestAnn.java
      * 原因：指定了package，会报错：
      * java.lang.NoClassDefFoundError: MyGetterProcessor (wrong name: com/compile/apt/MyGetterProcessor)
      */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         StringBuilder builder = new StringBuilder()
-                .append("package com.compile.apt;\n\n")
+                .append("package com.jvm.compile.apt;\n\n")
                 .append("public class GeneratedClass {\n\n") // open class
                 .append("\tpublic String getMessage() {\n") // open method
                 .append("\t\treturn \"");
@@ -45,7 +45,7 @@ public class MyGetterProcessor extends AbstractProcessor {
                 .append("\t}\n") // close method
                 .append("}\n"); // close class
         try { // write the file
-            JavaFileObject source = processingEnv.getFiler().createSourceFile("com.compile.apt.GeneratedClass");
+            JavaFileObject source = processingEnv.getFiler().createSourceFile("com.jvm.compile.apt.GeneratedClass");
             Writer writer = source.openWriter();
             writer.write(builder.toString());
             writer.flush();

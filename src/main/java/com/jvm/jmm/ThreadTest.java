@@ -1,4 +1,4 @@
-package com.jmm;
+package com.jvm.jmm;
 
 /**
  * @author zhanglifeng

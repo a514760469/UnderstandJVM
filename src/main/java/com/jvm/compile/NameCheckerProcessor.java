@@ -1,4 +1,4 @@
-package com.compile;
+package com.jvm.compile;
 
 import java.util.Set;
 

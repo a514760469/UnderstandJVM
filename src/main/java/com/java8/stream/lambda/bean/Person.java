@@ -1,8 +1,11 @@
 package com.java8.stream.lambda.bean;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 /**
  * @author zhanglifeng
- * @date 2019/10/26/0026
+ * @since 2019/10/26/0026
  */
 public class Person {
 
@@ -12,6 +15,8 @@ public class Person {
 
     private int stature;
 
+    private BigDecimal amount;
+
     public Person() {
     }
 
@@ -19,6 +24,14 @@ public class Person {
         this.name = name;
         this.age = age;
         this.stature = stature;
+    }
+
+    /**
+     * groupBy加金额
+     */
+    public Person(String name, BigDecimal amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
     public String getName() {
@@ -45,6 +58,14 @@ public class Person {
         this.stature = stature;
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -52,5 +73,20 @@ public class Person {
                 ", age=" + age +
                 ", stature=" + stature +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                stature == person.stature &&
+                Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, stature);
     }
 }

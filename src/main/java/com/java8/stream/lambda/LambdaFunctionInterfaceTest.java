@@ -78,6 +78,7 @@ public class LambdaFunctionInterfaceTest {
         System.out.println(work);
     }
 
+    // 注解可以省略
 //    @FunctionalInterface
     public interface Worker {
         String work();
