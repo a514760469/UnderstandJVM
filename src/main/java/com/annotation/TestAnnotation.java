@@ -15,4 +15,6 @@ public @interface TestAnnotation {
 	int id() default 1;
 	
 	String msg() default "a";
+
+	String value() default "";
 }

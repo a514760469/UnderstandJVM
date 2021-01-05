@@ -8,7 +8,7 @@ import com.annotation.TestAnnotation;
 @TestAnnotation(id = 100, msg = "abc")
 public class Test {
 	
-	@TestAnnotation
+	@TestAnnotation(value = "11111")
 	private String field;
 	
 	public Test() {
@@ -36,6 +36,7 @@ public class Test {
 				TestAnnotation fann = field.getAnnotation(TestAnnotation.class);
 				System.out.println("fann.id(): " + fann.id());
 				System.out.println("fann.msg(): " + fann.msg());
+				System.err.println("fann.value(): " + fann.value());
 			}
 			
 		}
