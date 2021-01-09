@@ -1,4 +1,4 @@
-package com.ipint;
+package com.coding.ipint;
 
 public class IpToInt {
 	

@@ -26,12 +26,20 @@
 	</properties>
 	
 	<dependencies>
+
+		<!-- 动态代理 cglib javassist 底层 asm -->
 		<dependency>
 		    <groupId>cglib</groupId>
 		    <artifactId>cglib</artifactId>
 		    <version>3.2.8</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.25.0-GA</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
