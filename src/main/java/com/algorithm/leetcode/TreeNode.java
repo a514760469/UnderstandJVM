@@ -2,17 +2,27 @@ package com.algorithm.leetcode;
 
 /**
  * 二叉树节点的定义(leetcode)
+ *
  * @author zhanglifeng
  * @since 2020-05-15 14:05
  */
 public class TreeNode {
 
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
-    TreeNode(int val) {
+    public TreeNode() {
+    }
+
+    public TreeNode(int val) {
         this.val = val;
+    }
+
+    public TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
     }
 
     @Override

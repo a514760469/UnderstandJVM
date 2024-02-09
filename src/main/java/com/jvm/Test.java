@@ -1,21 +1,34 @@
 package com.jvm;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Test {
 
-	private int a;
+    public static void main(String[] args) throws IOException {
+//        int max = 200;
+//        int fileCounts = 1000;
+//        int batches = fileCounts % max == 0 ? fileCounts / max : (fileCounts / max) + 1;
+//        System.out.println("batches = " + batches);
 
-	static class B {
-		int value;
-		final int get() {
-			return value;
-		}
-	}
+//        Stream<Path> files = Files.walk(Paths.get("/Users/zhanglifeng/Downloads/20220421/"));
+//        List<Path> paths = files.collect(Collectors.toList());
 
-	public void foo() {
-	}
+//        System.out.println("paths = " + paths.stream());
 
+        int a = Integer.MAX_VALUE;
+        System.out.println(Integer.toBinaryString(a));
+//        String s = new String();
 
-	public static void main(String[] args) {
-		System.out.println(new Test().a);
-	}
+        System.out.println(a + 1);
+        System.out.println(Integer.toBinaryString(a + 1));
+        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
+
+        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE + 1));
+    }
 }

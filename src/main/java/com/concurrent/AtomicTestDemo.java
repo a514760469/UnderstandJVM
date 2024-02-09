@@ -1,7 +1,9 @@
 package com.concurrent;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.LongAccumulator;
+import java.util.concurrent.atomic.LongAdder;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.StampedLock;
 
 /**
  * @author zhanglifeng
@@ -10,31 +12,22 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AtomicTestDemo {
 
     public static void main(String[] args) {
-        AtomicReference<Member> ref = new AtomicReference<>();
-        Member zs = new Member("zs", 20);
-        Member ls = new Member("ls", 30);
-        ref.set(zs);
-        ref.compareAndSet(zs, ls);
-        System.out.println(ref);
+//        LongAdder longAdder = new LongAdder();
+//        longAdder.increment();
+//        longAdder.add(1);
 
-        float f = 10.2F;
-        System.out.println(f);
-        int i = Float.floatToIntBits(f);
-        System.out.println(i);
-    }
 
-    static class Member {
-        private String name;
-        private int age;
+        LongAccumulator longAccumulator = new LongAccumulator((x, y) -> y + x, 0);
+        longAccumulator.accumulate(4);
+        System.out.println("longAccumulator.get() = " + longAccumulator.get());
 
-        public Member(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
+        StampedLock lock = new StampedLock();
+        long l = lock.writeLock();
+        System.out.println("l = " + l);
+        lock.unlockWrite(l);
 
-        @Override
-        public String toString() {
-            return "name = " + this.name + "、age = " + this.age;
-        }
+
+//        lock.tryOptimisticRead();
+
     }
 }

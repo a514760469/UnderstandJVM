@@ -1,5 +1,7 @@
 package com.concurrent.executors;
 
+import org.junit.Test;
+
 import java.util.concurrent.*;
 
 /**
@@ -11,6 +13,42 @@ import java.util.concurrent.*;
  */
 public class ExecutorsStaticFactoryMethod {
 
+    static class Task implements Runnable {
+        private final String name;
+
+        public Task(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("start task " + name);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignore) {
+            }
+            System.out.println("end task " + name);
+        }
+    }
+
+
+    @Test
+    public void testThreadPool() throws Exception {
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+//        threadPool.submit(new Task("1"));
+//        threadPool.submit(new Task("2"));
+//        threadPool.shutdown();
+
+
+        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
+//        scheduledThreadPool.submit(new Task("s1"));
+        scheduledThreadPool.scheduleAtFixedRate(new Task("s2"), 1, 1, TimeUnit.SECONDS);
+
+
+        Thread.sleep(10000);
+        scheduledThreadPool.shutdown();
+    }
+
     /**
      * 包装一层不可配置
      * ExecutorService executorService = Executors.unconfigurableExecutorService(singleThread);
@@ -18,7 +56,7 @@ public class ExecutorsStaticFactoryMethod {
      */
     public static void main(String[] args) {
         // 将创建一个固定长度的线程池，每当提交一个任务就创建一个线程，直到达到最大数量.如果某个线程Exception，会补充一个。
-        // 默认使用无界的LinkedBlockingQueue，
+        // 默认使用无界的 LinkedBlockingQueue，
         Executor fixedThreadPool = Executors.newFixedThreadPool(10);
 
         // 创建一个可缓存的线程池，如果容量超过处理规模，则回收线程，如果需求增加，则可以添加新的线程，线程池规模不限制。

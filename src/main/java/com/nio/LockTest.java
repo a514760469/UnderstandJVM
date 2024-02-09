@@ -49,7 +49,7 @@ public class LockTest {
 
 
         filename = args [1];
-        RandomAccessFile raf = new RandomAccessFile (filename, (writer) ? "rw" : "r");
+        RandomAccessFile raf = new RandomAccessFile(filename, writer ? "rw" : "r");
         FileChannel fc = raf.getChannel();
         LockTest lockTest = new LockTest();
 

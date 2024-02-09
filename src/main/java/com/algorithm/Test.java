@@ -11,6 +11,9 @@ public class Test {
 		
 		String binary = Integer.toBinaryString(a >> 2);
 		System.out.println(binary);
+
 	}
+
+
 	
 }

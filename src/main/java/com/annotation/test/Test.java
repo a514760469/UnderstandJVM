@@ -8,7 +8,7 @@ import com.annotation.TestAnnotation;
 @TestAnnotation(id = 100, msg = "abc")
 public class Test {
 	
-	@TestAnnotation(value = "11111")
+//	@TestAnnotation(value = "11111")
 	private String field;
 	
 	public Test() {
